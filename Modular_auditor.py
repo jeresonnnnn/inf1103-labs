@@ -16,7 +16,20 @@ def get_valid_input():
     else:
         print(f"Error! '{user_input}' is not a valid entry. Please try again!")
         return None
-        
+
+def process_delivery(current_total, new_total):
+    new_delivery = current_total + new_total
+    return new_delivery
+
+def calculate_tax(amount):
+    tax = amount * 0.10
+    return tax
+
+def generate_report(total_units, failed_attempts):
+    print("\n--- Delivery Report ---")
+    print(f"Total Deliveries Processed: {total_units}")
+    print(f"Number of Failed/Rejected Entries: {failed_attempts}")
+
 while True :
     user_input = get_valid_input()
 

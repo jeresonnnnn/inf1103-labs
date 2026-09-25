@@ -27,6 +27,15 @@ def load_inventory(filename="orders.txt"):
 
                 return orders
 
+def save_inventory(orders, filename="orders.txt"):
+     with open(filename, "w") as f:
+          for order in orders:
+               order_id = order[0]
+               product_name = order[1]
+               quantity = order[2]
+               f.write(str(order_id) + "," + product_name + "," + str(quantity) + "\n")
+               
+
 def main():
     orders = load_inventory()
 
@@ -48,5 +57,4 @@ def main():
                     print("Error! '" + quantity_input + "' is not a valid quantity. Please try again!")
                     continue
 
-    if count_items(orders) == 0:
-        print("No orders found -- either orders.txt didn't exist yet, or it was empty.")
+main()

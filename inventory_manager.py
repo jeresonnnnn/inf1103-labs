@@ -24,7 +24,7 @@ def find_product(inventory, product_id):
     return None
 
 def add_product(inventory):
-    print("Add New Product")
+    print("\nAdd New Product")
     product_id = input("Product ID: ")
     if find_product(inventory, product_id) is not None:
         print("A product with that ID already exists.")
@@ -35,42 +35,44 @@ def add_product(inventory):
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
     except ValueError:
-        print("Invalid number entered. Product not added.")
+        print("\nInvalid number entered. Product not added.")
         return
     product = {"id": product_id, "name": name, "price": price, "stock": stock}
     inventory.append(product)
-    print("Product added successfully")
+    print("\nProduct added successfully")
 
 def display_all(inventory):
-    print("Current Inventory")
+    print("\nCurrent Inventory")
+    print("-"*50)
     if len(inventory) == 0:
         print("No products.")
     for p in inventory:
         print(f"ID: {p['id']} | Name: {p['name']} | Price: ${p['price']:.2f} | Stock: {p['stock']}")
-
+    print("-"*50)
+    
 def save_inventory(inventory):
     file = open(FILENAME, "w")
     json.dump(inventory, file, indent=4)
     file.close()
-    print("Inventory saved successfully to inventory.json")
+    print("\nInventory saved successfully to inventory.json")
 
 def update_stocks(inventory):
-    print("Update stocks")
+    print("\nUpdate stocks")
     product_id = input("Enter Product ID: ")
     product = find_product(inventory, product_id)
 
     if product is None:
-        print("Product is not found.")
+        print("\nProduct is not found.")
         return
 
-    print("Product is found: ")
+    print("\nProduct is found: ")
     print("Name:", product["name"])
     print("Current stock:", product["stock"])
     try:
-        product["stock"] = int(input("New stock quantity: "))
-        print("Stock updated successfully!")
+        product["stock"] = int(input("\nNew stock quantity: "))
+        print("\nStock updated successfully!")
     except ValueError:
-        print("Invalid number entered. Stock not updated.")
+        print("\nInvalid number entered. Stock not updated.")
 
 def search_product(inventory):
     print("Search Product")
@@ -78,24 +80,26 @@ def search_product(inventory):
     product = find_product(inventory, product_id)
 
     if product is None:
-        print("Product not found.")
+        print("\nProduct not found.")
         return
 
-    print("Product found.")
+    print("\nProduct found.")
+    print("-"*50)
     print("ID:", product["id"])
     print("Name:", product["name"])
     print(f"Price: ${product['price']:.2f}")
     print("Stock: ", product["stock"])
+    print("-"*50)
 
 def show_menu():
-    print("\n----------Menu----------")
+    print("\n----------MENU----------")
     print("1. Display All Products")
     print("2. Add product")
     print("3. Update Stocks")
     print("4. Search Product")
     print("5. Save Inventory")
     print("6. Exit")
-    
+    print("-"*20)
 
 def main():
     print("="*40)
@@ -107,7 +111,7 @@ def main():
 
     running = True
     while running:
-        choice = input("Enter option: ")
+        choice = input("\nEnter option: ")
 
         if choice == "1":
             display_all(inventory)

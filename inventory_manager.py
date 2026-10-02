@@ -7,7 +7,7 @@ def load_inventory():
         file = open(FILENAME, "r")
         inventory = json.load(file)
         file.close()
-        print("inventory.json found.")
+        print("\ninventory.json found.")
         print("Inventory loaded succcessfully.")
         return inventory
     except FileNotFoundError:
@@ -72,17 +72,34 @@ def update_stocks(inventory):
     except ValueError:
         print("Invalid number entered. Stock not updated.")
 
+def search_product(inventory):
+    print("Search Product")
+    product_id = input("Enter Product ID: ")
+    product = find_product(inventory, product_id)
+
+    if product is None:
+        print("Product not found.")
+        return
+
+    print("Product found.")
+    print("ID:", product["id"])
+    print("Name:", product["name"])
+    print(f"Price: ${product['price']:.2f}")
+    print("Stock: ", product["stock"])
 
 def show_menu():
-    print("----------Menu----------")
+    print("\n----------Menu----------")
     print("1. Display All Products")
     print("2. Add product")
     print("3. Update Stocks")
+    print("4. Search Product")
     print("5. Save Inventory")
+    print("6. Exit")
+    
 
 def main():
     print("="*40)
-    print("Inventory Management System")
+    print("INVENTORY MANAGEMENT SYSTEM")
     print("="*40)
 
     inventory = load_inventory()
@@ -98,10 +115,17 @@ def main():
             add_product(inventory)
         elif choice =="3":
             update_stocks(inventory)
+        elif choice == "4":
+            search_product(inventory)
         elif choice == "5":
             save_inventory(inventory)
-
+        elif choice == "6":
+            print("Saving inventory before exiting...")
+            save_inventory(inventory)
+            print("\nThank you for using Inventory Management System.")
+            print("Program terminated.")
+            running = False
         else:
-            break
+            print("Invalid option. Please choose 1-6.")
 
 main()

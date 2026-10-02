@@ -54,11 +54,30 @@ def save_inventory(inventory):
     file.close()
     print("Inventory saved successfully to inventory.json")
 
-def update_stocks
+def update_stocks(inventory):
+    print("Update stocks")
+    product_id = input("Enter Product ID: ")
+    product = find_product(inventory, product_id)
+
+    if product is None:
+        print("Product is not found.")
+        return
+
+    print("Product is found: ")
+    print("Name:", product["name"])
+    print("Current stock:", product["stock"])
+    try:
+        product["stock"] = int(input("New stock quantity: "))
+        print("Stock updated successfully!")
+    except ValueError:
+        print("Invalid number entered. Stock not updated.")
+
+
 def show_menu():
     print("----------Menu----------")
     print("1. Display All Products")
     print("2. Add product")
+    print("3. Update Stocks")
     print("5. Save Inventory")
 
 def main():
@@ -77,6 +96,8 @@ def main():
             display_all(inventory)
         elif choice == "2":
             add_product(inventory)
+        elif choice =="3":
+            update_stocks(inventory)
         elif choice == "5":
             save_inventory(inventory)
 

@@ -48,6 +48,39 @@ def display_all(inventory):
     for p in inventory:
         print(f"ID: {p['id']} | Name: {p['name']} | Price: ${p['price']:.2f} | Stock: {p['stock']}")
 
-inventory = load_inventory()
-display_all(inventory)
-    
+def save_inventory(inventory):
+    file = open(FILENAME, "w")
+    json.dump(inventory, file, indent=4)
+    file.close()
+    print("Inventory saved successfully to inventory.json")
+
+def update_stocks
+def show_menu():
+    print("----------Menu----------")
+    print("1. Display All Products")
+    print("2. Add product")
+    print("5. Save Inventory")
+
+def main():
+    print("="*40)
+    print("Inventory Management System")
+    print("="*40)
+
+    inventory = load_inventory()
+    show_menu()
+
+    running = True
+    while running:
+        choice = input("Enter option: ")
+
+        if choice == "1":
+            display_all(inventory)
+        elif choice == "2":
+            add_product(inventory)
+        elif choice == "5":
+            save_inventory(inventory)
+
+        else:
+            break
+
+main()

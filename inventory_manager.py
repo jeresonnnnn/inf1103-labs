@@ -1,8 +1,21 @@
-inventory = [
-    {"id": "P001", "name": "Laptop", "price": 1200.00, "stock": 15},
-    {"id": "P002", "name": "Mouse", "price": 25.50, "stock": 40},
-    {"id": "P003", "name": "Keyboard", "price": 45.00, "stock": 25},
-]
+import json
+
+FILENAME = "inventory.json"
+
+def load_inventory():
+    try:
+        file = open(FILENAME, "r")
+        inventory = json.load(file)
+        file.close()
+        print("inventory.json found.")
+        print("Inventory loaded succcessfully.")
+        return inventory
+    except FileNotFoundError:
+        print("inventory.json not found.")
+        return []
+    except json.JSONDecodeError:
+        print("file is empty.")
+        return []
 
 def find_product(inventory, product_id):
     for product in inventory:
@@ -35,7 +48,6 @@ def display_all(inventory):
     for p in inventory:
         print(f"ID: {p['id']} | Name: {p['name']} | Price: ${p['price']:.2f} | Stock: {p['stock']}")
 
-display_all(inventory)
-add_product(inventory)
+inventory = load_inventory()
 display_all(inventory)
     

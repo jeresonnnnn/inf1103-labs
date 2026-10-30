@@ -17,3 +17,13 @@ class DigitalProduct(Product):
 
     def get_fulfilment_info(self):
         return "Digital product: delivered through a download link, no shipping."
+
+    def to_dict(self):
+        data = super().to_dict()
+        data["type"] = "digital"
+        data["download_size"] = self.__download_size
+        return data
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["product_id"], data["name"], data["price"], data["stock"], data["download_size"])

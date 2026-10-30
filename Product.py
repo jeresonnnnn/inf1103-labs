@@ -1,4 +1,6 @@
-class Product:
+from abc import ABC, abstractmethod
+
+class Product(ABC):
 
     def __init__(self, product_id, name, price, stock):
         self.__product_id = product_id
@@ -20,7 +22,6 @@ class Product:
         return self.__stock
 
     def update_stock(self, quantity):
-        """Set stock to `quantity`; Product decides what is valid."""
         if not isinstance(quantity, int) or quantity < 0:
             raise ValueError("Stock must be a non-negative whole number.")
         self.__stock = quantity
@@ -37,7 +38,7 @@ class Product:
             "price": self.__price,
             "stock": self.__stock,
         }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(data["product_id"], data["name"], data["price"], data["stock"])
+    
+    @abstractmethod
+    def get_fulfilment_info(self):
+        pass
